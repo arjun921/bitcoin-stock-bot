@@ -38,8 +38,8 @@ def makeWebhookResult(req):
     # cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Asia':400, 'Africa':500}
     if zone=='Current Price':
         speech = "The " + zone + " is " + fetch_current() + " USD."
-    else if zone=='Opening Price':
-        speech = "The " + zone + " is " + fetch_opening() + " USD."
+    # else if zone=='Opening Price':
+    #     speech = "The " + zone + " is " + fetch_opening() + " USD."
 
 
     print("Response:")
