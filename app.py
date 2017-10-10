@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import urllib.request
+from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import json
 import os
