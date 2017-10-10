@@ -36,8 +36,11 @@ def makeWebhookResult(req):
     zone = parameters.get("oil-price")
 
     # cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Asia':400, 'Africa':500}
+    if zone=='Current Price':
+        speech = "The " + zone + " is " + fetch_current() + " USD."
+    else if zone=='Opening Price':
+        speech = "The " + zone + " is " + fetch_opening() + " USD."
 
-    speech = "The " + zone + " is " + fetch_current() + " USD."
 
     print("Response:")
     print(speech)
@@ -61,6 +64,17 @@ def fetch_current():
     x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
     return x[0].contents[0]
 
+def fetch_opening():
+    webpage = ""
+    soup = BeautifulSoup(load_page(), 'html.parser')
+    x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
+    return x[0].contents[0]
+
+def fetch_close():
+    a = fetch_summary()
+    a=a[0]
+    stri = str(a)
+    return stri[stri.find('ltr')+5:stri.find('</span>',stri.find('ltr'))]
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
