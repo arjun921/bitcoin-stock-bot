@@ -36,7 +36,7 @@ def makeWebhookResult(req):
 
     cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Profit Percentage':400, 'Loss Percentage':500}
 
-    speech = "The" +zone+"  oil price " + " is " + str(cost[zone]) + " euros."
+    speech = "The" + zone +"  oil price " + " is " + str(cost[zone]) + " euros."
 
     print("Response:")
     print(speech)
