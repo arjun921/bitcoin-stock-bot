@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import urllib
+import urllib.request
+from bs4 import BeautifulSoup
 import json
 import os
 
@@ -36,7 +37,7 @@ def makeWebhookResult(req):
 
     cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Asia':400, 'Africa':500}
 
-    speech = "The cost of shipping to " + zone + " is " + str(cost[zone]) + " euros."
+    speech = "The cost of shipping to " + zone + " is " + fetch_current() + " euros."
 
     print("Response:")
     print(speech)
@@ -48,6 +49,16 @@ def makeWebhookResult(req):
         # "contextOut": [],
         "source": "apiai-onlinestore-shipping"
     }
+
+def load_page():
+    req = Request('https://in.investing.com/commodities/crude-oil', headers={'User-Agent': 'Mozilla/5.0'})
+    webpage = urlopen(req).read()
+    return webpage
+
+def fetch_current():
+    soup = BeautifulSoup(load_page(), 'html.parser')
+    x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
+    return x[0].contents[0]
 
 
 if __name__ == '__main__':
