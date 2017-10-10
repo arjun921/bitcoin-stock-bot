@@ -63,6 +63,12 @@ def fetch_current():
     x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
     return x[0].contents[0]
 
+def fetch_summary():
+    webpage = ""
+    soup = BeautifulSoup(load_page(), 'html.parser')
+    x = soup.find_all('div',class_="bottomText float_lang_base_1")
+    return x
+
 def fetch_opening():
     webpage = ""
     soup = BeautifulSoup(load_page(), 'html.parser')
