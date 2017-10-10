@@ -35,9 +35,9 @@ def makeWebhookResult(req):
     parameters = result.get("parameters")
     zone = parameters.get("oil-price")
 
-    cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Asia':400, 'Africa':500}
+    # cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Asia':400, 'Africa':500}
 
-    speech = "The cost of shipping to " + zone + " is " + fetch_current() + " euros."
+    speech = "The " + zone + " is " + fetch_current() + " USD."
 
     print("Response:")
     print(speech)
