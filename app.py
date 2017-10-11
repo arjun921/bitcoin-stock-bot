@@ -50,8 +50,9 @@ def makeWebhookResult(req):
     elif zone == 'Lowest':
         low,high = fetch_range()
         speech = "Today's lowest price is {} USD.".format(low)
-    print("Response:")
-    print(speech)
+
+    # print("Response:")
+    # print(speech)
 
     return {
         "speech": speech,
