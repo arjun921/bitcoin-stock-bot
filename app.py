@@ -101,15 +101,15 @@ def makeWebhookResult(req):
         speech = "The " + zone + " is " + fetch_open() + " USD."
     elif zone == 'Trend':
         speech = "The " + zone.lower() + " is " + fetch_trend()
-    elif zone == 'Range':
-        low,high = fetch_range()
-        speech = "Today's range is {} - {}".format(low,high)
-    elif zone == 'Highest':
-        low,high = fetch_range()
-        speech = "Today's highest price is {} USD.".format(high)
-    elif zone == 'Lowest':
-        low,high = fetch_range()
-        speech = "Today's lowest price is {} USD.".format(low)
+    # elif zone == 'Range':
+    #     low,high = fetch_range()
+    #     speech = "Today's range is {} - {}".format(low,high)
+    # elif zone == 'Highest':
+    #     low,high = fetch_range()
+    #     speech = "Today's highest price is {} USD.".format(high)
+    # elif zone == 'Lowest':
+    #     low,high = fetch_range()
+    #     speech = "Today's lowest price is {} USD.".format(low)
 
     # print("Response:")
     # print(speech)
