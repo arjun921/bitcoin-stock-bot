@@ -40,7 +40,7 @@ def makeWebhookResult(req):
     elif zone == 'Opening Price':
         speech = "The " + zone + " is " + fetch_open() + " USD."
     elif zone == 'Trend':
-        speech = "The" + zone + " is " + fetch_trend()
+        speech = "The " + zone.lower() + " is " + fetch_trend()
 
     print("Response:")
     print(speech)
