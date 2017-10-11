@@ -41,7 +41,15 @@ def makeWebhookResult(req):
         speech = "The " + zone + " is " + fetch_open() + " USD."
     elif zone == 'Trend':
         speech = "The " + zone.lower() + " is " + fetch_trend()
-
+    elif zone == 'Range':
+        low,high = fetch_range()
+        speech = "Today's range is {} - {}".format(low,high)
+    elif zone == 'Highest':
+        low,high = fetch_range()
+        speech = "Today's highest price is {} USD.".format(high)
+    elif zone == 'Lowest':
+        low,high = fetch_range()
+        speech = "Today's lowest price is {} USD.".format(low)
     print("Response:")
     print(speech)
 
@@ -50,6 +58,17 @@ def makeWebhookResult(req):
         "displayText": speech,
         "source": "apiai-onlinestore-shipping"
     }
+
+
+def fetch_range():
+    a = fetch_summary()
+    a=a[0]
+    stri = str(a)
+    s = stri[stri.find('Day\'s Range:'):]
+    low = s[s.find('low">')+s[s.find('low">'):].find('>')+1:][:s[s.find('low">')+s[s.find('low">'):].find('>')+1:].find('</span>')]
+    high = stri[stri.find('low'):][stri[stri.find('low'):].find('high">'):][stri[stri.find('low'):][stri[stri.find('low'):].find('high">'):].find('>')+1:]
+    high = high[:high.find('</span')]
+    return low + " - " + high
 
 
 def load_page():
