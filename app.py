@@ -9,8 +9,6 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
-
-global speech
 # Flask app should start in global layout
 app = Flask(__name__)
 
@@ -90,6 +88,7 @@ def webhook():
 
 
 def makeWebhookResult(req):
+    speech = ""
     if req.get("result").get("action") != "oil.current":
         return {}
     result = req.get("result")
