@@ -12,55 +12,6 @@ from flask import make_response
 # Flask app should start in global layout
 app = Flask(__name__)
 
-speech = ""
-
-@app.route('/webhook', methods=['POST'])
-def webhook():
-    req = request.get_json(silent=True, force=True)
-    print("Request:")
-    print(json.dumps(req, indent=4))
-    res = makeWebhookResult(req)
-    res = json.dumps(res, indent=4)
-    print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
-
-
-def makeWebhookResult(req):
-    if req.get("result").get("action") != "oil.current":
-        return {}
-    result = req.get("result")
-    parameters = result.get("parameters")
-    zone = parameters.get("oil-price")
-    print(zone)
-    if zone == 'Current Price':
-        speech = "The " + zone + " is " + fetch_current() + " USD."
-    elif zone == 'Closing Price':
-        speech = "The " + zone + " is " + fetch_close() + " USD."
-    elif zone == 'Opening Price':
-        speech = "The " + zone + " is " + fetch_open() + " USD."
-    elif zone == 'Trend':
-        speech = "The " + zone.lower() + " is " + fetch_trend()
-    elif zone == 'Range':
-        low,high = fetch_range()
-        speech = "Today's range is {} - {}".format(low,high)
-    elif zone == 'Highest':
-        low,high = fetch_range()
-        speech = "Today's highest price is {} USD.".format(high)
-    elif zone == 'Lowest':
-        low,high = fetch_range()
-        speech = "Today's lowest price is {} USD.".format(low)
-
-    # print("Response:")
-    # print(speech)
-
-    return {
-        "speech": speech,
-        "displayText": speech,
-        "source": "apiai-onlinestore-shipping"
-    }
-
 
 def fetch_range():
     a = fetch_summary()
@@ -121,6 +72,55 @@ def fetch_trend():
         return "UP by " + change_percent
     elif stri.find('down') > 1:
         return "DOWN by " + change_percent
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    req = request.get_json(silent=True, force=True)
+    print("Request:")
+    print(json.dumps(req, indent=4))
+    res = makeWebhookResult(req)
+    res = json.dumps(res, indent=4)
+    print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
+
+def makeWebhookResult(req):
+    if req.get("result").get("action") != "oil.current":
+        return {}
+    result = req.get("result")
+    parameters = result.get("parameters")
+    zone = parameters.get("oil-price")
+    print(zone)
+    if zone == 'Current Price':
+        speech = "The " + zone + " is " + fetch_current() + " USD."
+    elif zone == 'Closing Price':
+        speech = "The " + zone + " is " + fetch_close() + " USD."
+    elif zone == 'Opening Price':
+        speech = "The " + zone + " is " + fetch_open() + " USD."
+    elif zone == 'Trend':
+        speech = "The " + zone.lower() + " is " + fetch_trend()
+    elif zone == 'Range':
+        low,high = fetch_range()
+        speech = "Today's range is {} - {}".format(low,high)
+    elif zone == 'Highest':
+        low,high = fetch_range()
+        speech = "Today's highest price is {} USD.".format(high)
+    elif zone == 'Lowest':
+        low,high = fetch_range()
+        speech = "Today's lowest price is {} USD.".format(low)
+
+    # print("Response:")
+    # print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        "source": "apiai-onlinestore-shipping"
+    }
+
+
 
 
 if __name__ == '__main__':
