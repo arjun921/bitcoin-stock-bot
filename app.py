@@ -68,7 +68,7 @@ def fetch_range():
     low = s[s.find('low">')+s[s.find('low">'):].find('>')+1:][:s[s.find('low">')+s[s.find('low">'):].find('>')+1:].find('</span>')]
     high = stri[stri.find('low'):][stri[stri.find('low'):].find('high">'):][stri[stri.find('low'):][stri[stri.find('low'):].find('high">'):].find('>')+1:]
     high = high[:high.find('</span')]
-    return low + " - " + high
+    return low,high
 
 
 def load_page():
