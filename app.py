@@ -25,6 +25,7 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+
 def makeWebhookResult(req):
     if req.get("result").get("action") != "oil.current":
         return {}
@@ -32,13 +33,12 @@ def makeWebhookResult(req):
     parameters = result.get("parameters")
     zone = parameters.get("oil-price")
 
-    # cost = {'Current Price':100, 'Closing Price':200, 'Opening Price':300, 'Asia':400, 'Africa':500}
-    if zone=='Current Price':
+    if zone == 'Current Price':
         speech = "The " + zone + " is " + fetch_current() + " USD."
-    elif zone=='Closing Price':
+    elif zone == 'Closing Price':
         speech = "The " + zone + " is " + fetch_close() + " USD."
-    # else if zone=='Opening Price':
-    #     speech = "The " + zone + " is " + fetch_opening() + " USD."
+    elif zone == 'Opening Price':
+        speech = "The " + zone + " is " + fetch_open() + " USD."
 
 
     print("Response:")
@@ -69,11 +69,13 @@ def fetch_summary():
     x = soup.find_all('div',class_="bottomText float_lang_base_1")
     return x
 
-def fetch_opening():
-    webpage = ""
-    soup = BeautifulSoup(load_page(), 'html.parser')
-    x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
-    return x[0].contents[0]
+def fetch_open():
+    a = fetch_summary()
+    a=a[0]
+    stri = str(a)
+    s = stri[stri.find('Open:</span> <span dir="ltr">'):]
+    open_ = s[s.find('"ltr">')+6:s.find('</span></li>\n<li><span class="lighterGrayFont noBold">')]
+    return open_
 
 def fetch_close():
     a = fetch_summary()
