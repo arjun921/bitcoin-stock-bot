@@ -32,7 +32,7 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     zone = parameters.get("oil-price")
-
+    print(zone)
     if zone == 'Current Price':
         speech = "The " + zone + " is " + fetch_current() + " USD."
     elif zone == 'Closing Price':
