@@ -1,2 +1,2 @@
-# enata
-Intelligent Assistant for Oil Trading in WTI Oil Futures
+# bitcoin-stock-bot
+Intelligent assistant for Bitcoin Stock Market
