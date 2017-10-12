@@ -68,9 +68,9 @@ def fetch_trend():
     pctage = x[0].find_all('span', class_="parentheses")
     strpctage = str(pctage)
     change_percent = strpctage[strpctage.find('>') + 1:strpctage.find('%') + 1]
-    if change_percent>1:
+    if change_percent.find('+')==0:
         return "UP by " + change_percent
-    elif change_percent<1:
+    elif change_percent.find('-')==0:
         return "DOWN by " + change_percent
 #     if stri.find('up') > 1:
 #         return "UP by " + change_percent
