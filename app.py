@@ -25,7 +25,7 @@ def fetch_range():
 
 
 def load_page():
-    req = Request('https://www.investing.com/currencies/btc-usd', headers={'User-Agent': 'Mozilla/5.0'})
+    req = Request('https://in.investing.com/commodities/crude-oil', headers={'User-Agent': 'Mozilla/5.0'})
     webpage = urlopen(req).read()
     return webpage
 
