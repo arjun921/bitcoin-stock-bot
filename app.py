@@ -92,23 +92,23 @@ def makeWebhookResult(req):
         return {}
     result = req.get("result")
     parameters = result.get("parameters")
-    zone = parameters.get("oil-price")[0]
-    print (zone)
-    if zone == 'Current Price':
-        speech = "The " + zone + " is " + fetch_current() + " USD."
-    elif zone == 'Closing Price':
-        speech = "The " + zone + " is " + fetch_close() + " USD."
-    elif zone == 'Opening Price':
-        speech = "The " + zone + " is " + fetch_open() + " USD."
-    elif zone == 'Trend':
-        speech = "The " + zone.lower() + " is " + fetch_trend()
-    elif zone == 'Range':
+    param_bit = parameters.get("BTCStock")[0]
+    print (param_bit)
+    if param_bit == 'Current Price':
+        speech = "The " + param_bit + " is " + fetch_current() + " USD."
+    elif param_bit == 'Closing Price':
+        speech = "The " + param_bit + " is " + fetch_close() + " USD."
+    elif param_bit == 'Opening Price':
+        speech = "The " + param_bit + " is " + fetch_open() + " USD."
+    elif param_bit == 'Trend':
+        speech = "The " + param_bit.lower() + " is " + fetch_trend()
+    elif param_bit == 'Range':
         low,high = fetch_range()
         speech = "Today's range is {} - {}".format(low,high)
-    elif zone == 'Highest':
+    elif param_bit == 'Highest':
         low,high = fetch_range()
         speech = "Today's highest price is {} USD.".format(high)
-    elif zone == 'Lowest':
+    elif param_bit == 'Lowest':
         low,high = fetch_range()
         speech = "Today's lowest price is {} USD.".format(low)
 
