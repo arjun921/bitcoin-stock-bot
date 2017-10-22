@@ -85,19 +85,17 @@ def webhook():
     print(json.dumps(req, indent=4))
     res = makeWebhookResult(req)
     res = json.dumps(res, indent=4)
-    print(res)
+    # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
 
 
 def makeWebhookResult(req):
-    # if req.get("result").get("action") != "oil.current":
-    #     return {}
     result = req.get("result")
     parameters = result.get("parameters")
     zone = parameters.get("BTCoin")[0]
-    print (zone)
+    # print (zone)
     if zone == 'Current Price':
         speech = "The " + zone + " is " + fetch_current() + " USD."
     elif zone == 'Closing Price':
