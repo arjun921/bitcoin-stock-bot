@@ -92,8 +92,8 @@ def webhook():
 
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "oil.current":
-        return {}
+    # if req.get("result").get("action") != "oil.current":
+    #     return {}
     result = req.get("result")
     parameters = result.get("parameters")
     zone = parameters.get("oil-price")[0]
