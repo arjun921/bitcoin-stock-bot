@@ -85,7 +85,6 @@ def webhook():
     print(json.dumps(req, indent=4))
     res = makeWebhookResult(req)
     res = json.dumps(res, indent=4)
-    # print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
@@ -94,28 +93,25 @@ def webhook():
 def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
-    zone = parameters.get("BTCoin")[0]
-    # print (zone)
-    if zone == 'Current Price':
-        speech = "The " + zone + " is " + fetch_current() + " USD."
-    elif zone == 'Closing Price':
-        speech = "The " + zone + " is " + fetch_close() + " USD."
-    elif zone == 'Opening Price':
-        speech = "The " + zone + " is " + fetch_open() + " USD."
-    elif zone == 'Trend':
-        speech = "The " + zone.lower() + " is " + fetch_trend()
-    elif zone == 'Range':
+    params = parameters.get("BTCoin")[0]
+    if params == 'Current Price':
+        speech = "The " + params + " is " + fetch_current() + " USD."
+    elif params == 'Closing Price':
+        speech = "The " + params + " is " + fetch_close() + " USD."
+    elif params == 'Opening Price':
+        speech = "The " + params + " is " + fetch_open() + " USD."
+    elif params == 'Trend':
+        speech = "The " + params.lower() + " is " + fetch_trend()
+    elif params == 'Range':
         low,high = fetch_range()
         speech = "Today's range is {} - {}".format(low,high)
-    elif zone == 'Highest':
+    elif params == 'Highest':
         low,high = fetch_range()
         speech = "Today's highest price is {} USD.".format(high)
-    elif zone == 'Lowest':
+    elif params == 'Lowest':
         low,high = fetch_range()
         speech = "Today's lowest price is {} USD.".format(low)
 
-    print("Response:")
-    print(speech)
 
     return {
         "speech": speech,
