@@ -96,7 +96,7 @@ def makeWebhookResult(req):
         return {}
     result = req.get("result")
     parameters = result.get("parameters")
-    zone = parameters.get("oil-price")[0]
+    zone = parameters.get("Bitcoin")[0]
     print (zone)
     if zone == 'Current Price':
         speech = "The " + zone + " is " + fetch_current() + " USD."
