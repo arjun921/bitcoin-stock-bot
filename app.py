@@ -45,12 +45,13 @@ def fetch_summary():
 
 
 def fetch_open():
-    a = fetch_summary()
-    a = a[0]
-    stri = str(a)
-    s = stri[stri.find('Open:</span> <span dir="ltr">'):]
-    open_ = s[s.find('"ltr">')+6:s.find('</span></li>\n<li><span class="lighterGrayFont noBold">')]
-    return open_
+    soup = BeautifulSoup(load_page(), 'html.parser')
+    y = soup.find_all('div',class_="first inlineblock")
+    for x in y:
+        stri = str(x)
+        if stri.find("Open")>0:
+            val = x.find('span',class_="float_lang_base_2 bold").text
+            return val
 
 
 def fetch_close():
