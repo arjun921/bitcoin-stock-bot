@@ -17,7 +17,7 @@ It supports the following questions that retrieve live data from web.
 
 `Hows the trend for bitcoin?`
 
-
+`What is the lowest price today?`
 
 #### How to use?
 
@@ -32,3 +32,7 @@ You could access it from the following clients:
 ```
 https://console.dialogflow.com/api-client/demo/embedded/345028e2-43d5-4e7b-865b-3584309ad9d5
 ```
+
+##### Facebook Messenger
+
+Open messenger and search for `@priceBtcbot`
