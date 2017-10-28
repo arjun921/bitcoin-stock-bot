@@ -33,7 +33,7 @@ def load_page():
 def fetch_current():
     webpage = ""
     soup = BeautifulSoup(load_page(), 'html.parser')
-    x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
+    x = soup.find_all('span',class_="arial_26 inlineblock pid-945629-last")
     return x[0].contents[0]
 
 
@@ -45,12 +45,13 @@ def fetch_summary():
 
 
 def fetch_open():
-    a = fetch_summary()
-    a = a[0]
-    stri = str(a)
-    s = stri[stri.find('Open:</span> <span dir="ltr">'):]
-    open_ = s[s.find('"ltr">')+6:s.find('</span></li>\n<li><span class="lighterGrayFont noBold">')]
-    return open_
+    soup = BeautifulSoup(load_page(), 'html.parser')
+    y = soup.find_all('div',class_="first inlineblock")
+    for x in y:
+        stri = str(x)
+        if stri.find("Open")>0:
+            val = x.find('span',class_="float_lang_base_2 bold").text
+            return val
 
 
 def fetch_close():
@@ -85,39 +86,33 @@ def webhook():
     print(json.dumps(req, indent=4))
     res = makeWebhookResult(req)
     res = json.dumps(res, indent=4)
-    print(res)
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
 
 
 def makeWebhookResult(req):
-    if req.get("result").get("action") != "oil.current":
-        return {}
     result = req.get("result")
     parameters = result.get("parameters")
-    zone = parameters.get("oil-price")[0]
-    print (zone)
-    if zone == 'Current Price':
-        speech = "The " + zone + " is " + fetch_current() + " USD."
-    elif zone == 'Closing Price':
-        speech = "The " + zone + " is " + fetch_close() + " USD."
-    elif zone == 'Opening Price':
-        speech = "The " + zone + " is " + fetch_open() + " USD."
-    elif zone == 'Trend':
-        speech = "The " + zone.lower() + " is " + fetch_trend()
-    elif zone == 'Range':
+    params = parameters.get("BTCoin")[0]
+    if params == 'Current Price':
+        speech = "The " + params + " is " + fetch_current() + " USD."
+    elif params == 'Closing Price':
+        speech = "The " + params + " is " + fetch_close() + " USD."
+    elif params == 'Opening Price':
+        speech = "The " + params + " is " + fetch_open() + " USD."
+    elif params == 'Trend':
+        speech = "The " + params.lower() + " is " + fetch_trend()
+    elif params == 'Range':
         low,high = fetch_range()
         speech = "Today's range is {} - {}".format(low,high)
-    elif zone == 'Highest':
+    elif params == 'Highest':
         low,high = fetch_range()
         speech = "Today's highest price is {} USD.".format(high)
-    elif zone == 'Lowest':
+    elif params == 'Lowest':
         low,high = fetch_range()
         speech = "Today's lowest price is {} USD.".format(low)
 
-    print("Response:")
-    print(speech)
 
     return {
         "speech": speech,
