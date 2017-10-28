@@ -95,23 +95,25 @@ def makeWebhookResult(req):
     result = req.get("result")
     parameters = result.get("parameters")
     params = parameters.get("OIL-Price")[0]
-    if params == 'Current Price':
+    if params == 'current price':
         speech = "The " + params + " is " + fetch_current() + " USD."
-    elif params == 'Closing Price':
+    elif params == 'closing price':
         speech = "The " + params + " is " + fetch_close() + " USD."
-    elif params == 'Opening Price':
+    elif params == 'opening price':
         speech = "The " + params + " is " + fetch_open() + " USD."
-    elif params == 'Trend':
-        speech = "The " + params.lower() + " is " + fetch_trend()
-    elif params == 'Range':
-        low,high = fetch_range()
-        speech = "Today's range is {} - {}".format(low,high)
     elif params == 'highest price':
         low,high = fetch_range()
         speech = "Today's highest price is {} USD.".format(high)
-    elif params == 'Lowest':
+    elif params == 'lowest price':
         low,high = fetch_range()
         speech = "Today's lowest price is {} USD.".format(low)
+    params = parameters.get("market-trend")[0]
+    if params == 'trend':
+        speech = "The " + params.lower() + " is " + fetch_trend()
+    elif params == 'range':
+        low,high = fetch_range()
+        speech = "Today's range is {} - {}".format(low,high)
+    
 
 
     return {
