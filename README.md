@@ -25,7 +25,7 @@ You could access it from the following clients:
 
 ##### Telegram
 
-`@priceBtc_bot`
+[priceBtc_bot](https://telegram.me/priceBtc_bot)
 
 ##### Web
 
