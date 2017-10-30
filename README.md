@@ -25,14 +25,12 @@ You could access it from the following clients:
 
 ##### Telegram
 
-[priceBtc_bot](https://telegram.me/priceBtc_bot)
+[priceBtc_bot](https://telegram.me/priceBtc_bot){:target="_blank"}
 
 ##### Web
 
-```
-https://console.dialogflow.com/api-client/demo/embedded/345028e2-43d5-4e7b-865b-3584309ad9d5
-```
+[Web Demo](https://console.dialogflow.com/api-client/demo/embedded/345028e2-43d5-4e7b-865b-3584309ad9d5){:target="_blank"}
 
 ##### Facebook Messenger
 
-Open messenger and search for `@priceBtcbot`
+[@priceBtcbot](https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2Fmessages%2Ft%2Fuser%3A349004642190170){:target="_blank"}
