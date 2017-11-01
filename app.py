@@ -49,9 +49,9 @@ def fetch_open():
 	y = soup.find_all('div',class_="first inlineblock")
 	for x in y:
 		stri = str(x)
-	if stri.find("Open")>0:
-		val = x.find('span',class_="float_lang_base_2 bold").text
-		return val
+		if stri.find("Open")>0:
+			val = x.find('span',class_="float_lang_base_2 bold").text
+	return val
 
 
 def fetch_close():
