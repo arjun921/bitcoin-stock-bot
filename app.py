@@ -21,7 +21,7 @@ def fetch_range():
 	low = s[s.find('low">')+s[s.find('low">'):].find('>')+1:][:s[s.find('low">')+s[s.find('low">'):].find('>')+1:].find('</span>')]
 	high = stri[stri.find('low'):][stri[stri.find('low'):].find('high">'):][stri[stri.find('low'):][stri[stri.find('low'):].find('high">'):].find('>')+1:]
 	high = high[:high.find('</span')]
-    	return low,high
+	return low,high
 
 
 def load_page():
@@ -131,4 +131,3 @@ if __name__ == '__main__':
 	port = int(os.getenv('PORT', 5000))
 	print("Starting app on port %d" % port)
 	app.run(debug=True, port=port, host='0.0.0.0')
-
