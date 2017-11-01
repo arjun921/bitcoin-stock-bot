@@ -100,7 +100,7 @@ def makeWebhookResult(req):
 		if params == 'current price':
 			speech = "The " + params + " is " + fetch_current() + " USD."
 		elif params == 'closing price':
-			speech = "The " + params + " is " + fetch_close() + " USD."
+			speech = "The " + params + " was " + fetch_close() + " USD."
 		elif params == 'opening price':
 			speech = "The " + params + " is " + str(fetch_open()) + " USD."
 		elif params == 'highest price':
