@@ -97,7 +97,7 @@ def makeWebhookResult(req):
     
 	if parameters.get("OIL-Price"):
 		params = parameters.get("OIL-Price")
-		if params == 'current price':
+		if params == 'current':
 			speech = "The " + params + " is " + fetch_current() + " USD."
 		elif params == 'closing price':
 			speech = "The " + params + " was " + fetch_close() + " USD."
