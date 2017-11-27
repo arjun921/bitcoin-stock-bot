@@ -116,7 +116,7 @@ def makeWebhookResult(req):
 			speech = "The " + params.lower() + " is " + fetch_trend()
 		elif params == 'range':
 			low,high = fetch_range()
-			speech = "Today's range is {} - {}".format(high,low)
+			speech = "Today's range is {} - {}".format(low,high)
     
 
 
