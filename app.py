@@ -34,6 +34,7 @@ def fetch_current():
 	webpage = ""
 	soup = BeautifulSoup(load_page(), 'html.parser')
 	x = soup.find_all('span',class_="arial_26 inlineblock pid-8849-last")
+	print x
 	return x
 
 
